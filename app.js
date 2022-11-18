@@ -34,7 +34,19 @@ app.get('/', (req, res) => {
 //create short url
 app.post('/', (req, res) => {
   const originalURL = req.body.original_URL
-  res.render('url', { originalURL })
+  let newURL = 'http://shortenURL/'
+  let alphabetNumber = 'abcdefghijklmnopqrstuvwxyz1234567890'
+  alphabetNumber = alphabetNumber.split('')
+  let endURL = ''
+  //隨機樣本函數
+  function sample(array) {
+    return array[Math.floor(Math.random() * array.length)]
+  }
+  for (let i = 0; i < 5; i++) {
+    endURL += sample(alphabetNumber)
+  }
+  newURL += endURL
+  res.render('url', { newURL })
 })
 
 app.listen(PORT, () => {
