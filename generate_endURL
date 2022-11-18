@@ -1,0 +1,17 @@
+//隨機樣本函數
+function sample(array) {
+  return array[Math.floor(Math.random() * array.length)]
+}
+
+function generate_endURL() {
+ //Initial possible data to a array 
+  let alphabetNumber = 'abcdefghijklmnopqrstuvwxyz1234567890'
+  alphabetNumber = alphabetNumber.split('')
+  let endURL = ''
+  for (let i = 0; i < 5; i++) {
+    endURL += sample(alphabetNumber)
+  }
+  return endURL
+}
+
+module.exports = generate_endURL

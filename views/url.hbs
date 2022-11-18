@@ -1,5 +1,5 @@
 <div class="container" style="text-align: center ; margin-top:10rem">
-  <h1 style="margin-bottom: 5rem;">URL Shortener</h1>
+  <a href="/" style="color: black; text-decoration: none;"><h1 style="margin-bottom: 5rem;">URL Shortener</h1></a>
   <img src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png" alt="link-img"
     style="width: 5rem; height: 5rem; margin-bottom: 3rem;">
   <div>
@@ -13,17 +13,11 @@
 <script>
   function copyLink() {
     let copyText = document.getElementById("copyText")
-
     const selection = window.getSelection();
-
     const range = document.createRange();
-
     range.selectNodeContents(copyText);
-
     selection.removeAllRanges();
-
     selection.addRange(range);
-
     document.execCommand('copy');
   }
 </script>

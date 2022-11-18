@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const URL = require('./models/url')
+const generate_endURL = require('./generate_endURL')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -37,21 +38,11 @@ app.post('/', (req, res) => {
   const originalURL = req.body.original_URL
   // 確認資料庫有無重複
   URL.findOne({ originalURL })
-    .limit(1)
     .then((item) => {
       if (!item) {
         //若無重複則新建一筆資料
         let newURL = `http://localhost:${PORT}/`
-        let alphabetNumber = 'abcdefghijklmnopqrstuvwxyz1234567890'
-        alphabetNumber = alphabetNumber.split('')
-        let endURL = ''
-          //隨機樣本函數
-        function sample(array) {
-          return array[Math.floor(Math.random() * array.length)]
-        }
-        for (let i = 0; i < 5; i++) {
-          endURL += sample(alphabetNumber)
-        }
+        let endURL = generate_endURL()
         newURL += endURL
         URL.create({ originalURL, newURL })
           .then(() => res.render('url', { newURL }))
