@@ -1,12 +1,18 @@
-<div class="container" style="text-align: center ; margin-top:10rem">
-  <a href="/" style="color: black; text-decoration: none;"><h1 style="margin-bottom: 5rem;">URL Shortener</h1></a>
-  <img src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png" alt="link-img"
-    style="width: 5rem; height: 5rem; margin-bottom: 3rem;">
-  <div>
-    <p>Success! Please use this link:</p>
-    <p id="copyText">{{newURL}}</p>
-    <input type="button" class="btn btn-primary" onclick="copyLink()" data-toggle="tooltip" title="Copy to Clipboard"
-      value="Copy" readonly />   
+<div class="container">
+  <div class="title-img-wrapper">
+    <a href="/">
+      <h1>URL Shortener</h1>
+    </a>
+    <img src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png"
+      alt="link-img">
+  </div>
+  <div class="content-wrapper">
+    <div class="text-wrapper">
+      <p class="result-message">Success! Please use this link:</p>
+      <p id="copyText" class="newURL">{{newURL}}</p>
+      <input type="button" class="btn btn-primary" onclick="copyLink()" data-toggle="tooltip" title="Copy to Clipboard"
+        value="Copy" readonly />
+    </div>
   </div>
 </div>
 
@@ -19,5 +25,6 @@
     selection.removeAllRanges();
     selection.addRange(range);
     document.execCommand('copy');
+    alert('Link is copied!')
   }
 </script>

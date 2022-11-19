@@ -8,6 +8,7 @@ const URL = require('./models/url')
 const generate_endURL = require('./generate_endURL')
 
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static('public'))
 
 //set up handlebars
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
@@ -18,7 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 // MongoDB
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })//避開警告訊息
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 // MongoDB-connection status
 const db = mongoose.connection
 db.on('error', () => {
@@ -60,7 +61,11 @@ app.get('/:endURL', (req, res) => {
   let newURL = `http://localhost:${PORT}/${endURL}`
   URL.findOne({ newURL })
     .lean()
-    .then((item) => res.redirect(`${item.originalURL}`))
+    .then((item) => {
+      if(!item) {
+        res.redirect('/')
+      } else { res.redirect(`${item.originalURL}`) }
+      })
 })
 
 app.listen(PORT, () => {
